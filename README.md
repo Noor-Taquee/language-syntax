@@ -10,3 +10,4 @@ Syntax for different languages.
 ### Featured languages:
 
 - [**Python**](Python/README.md)
+- [**Javascript**](Javascript/README.md)
