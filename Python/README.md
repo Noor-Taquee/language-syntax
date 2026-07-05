@@ -2,67 +2,100 @@
 
 **Contents**
 - [File Name](#file-name)
+- [Syntax](#syntax)
 - [Keywords](#keywords)
 - [Variables](#variables)
-- [Literals - Built-in Types](#literals)
-  - [strings](#strings)
-  - [integers](#integers)
-  - [floating point numbers](#floating-point-numbers)
-  - [boolean](#boolean)
+- [Primitive Data Types](#primitive-data-types)
+  - [String](#string)
+  - [Integer](#integer)
+  - [Float](#float)
+  - [Boolean](#boolean)
   - [None](#none)
+- [Data Structures](#data-structures)
+  - [Lists](#lists)
+  - [Tuples](#tuples)
+  - [Dictionaries](#dictionaries)
+  - [Sets](#sets)
 - [Conditionals](#conditionals)
   - [if](#if)
   - [elif](#elif)
   - [else](#else)
-  - [in-line uses](#in-line-uses)
+  - [Inline Usage](#inline-usage)
 - [Loops](#loops)
   - [for](#for)
   - [while](#while)
 - [Functions](#functions)
-  - [Function](#function)
-    - [Function Definition](#function-definition)
-    - [Function Call](#function-call)
-    - [Return](#return)
-    - [Arguments](#arguments)
+  - [Function Definition](#function-definition)
+  - [Function Call](#function-call)
+  - [Return](#return)
+  - [Arguments](#arguments)
   - [Lambda](#lambda)
+- [Python-Specific Features](#python-specific-features)
+  - [F-Strings](#f-strings)
+  - [Comprehensions](#comprehensions)
+
+---
 
 ### File Name
-Python file names end with `.py` extension.
+Python source files typically use the `.py` extension.
+
 - **Modules**
-  - Module names are snake_case (e.g. `my_module.py`).
+  - Module names are usually snake_case (for example, `my_module.py`).
 - **Packages**
-  - Package names are snake_case as well (e.g. `my_package/`).
-  - Packages have a `__init__.py` file in their root directory, which is used to initialize the package.
+  - Package names are usually snake_case as well (for example, `my_package/`).
+  - Traditional packages usually include an `__init__.py` file.
 - **Type Files**
-  - Type hint files end with `.pyi` extension (e.g. `my_module.pyi`).
+  - Type hint stub files typically use the `.pyi` extension.
+
+---
+
+### Syntax
+Python uses indentation to define blocks instead of curly braces. A colon (`:`) starts a new block after statements such as `if`, `for`, `while`, `def`, and `class`.
+
+Consistent indentation is required, and 4 spaces is the standard style.
+
+```python
+if is_ready:
+    print("Ready")
+```
 
 ---
 
 ### Keywords
-There are **26** keywords in Python.
+Python has reserved keywords that cannot be used as identifiers.
+
+Common keywords include:
+- `False`
+- `None`
+- `True`
+- `and`
 - `as`
 - `assert`
+- `async`
+- `await`
 - `break`
 - `class`
 - `continue`
 - `def`
 - `del`
+- `elif`
 - `else`
 - `except`
-- `False`
 - `finally`
 - `for`
 - `from`
 - `global`
 - `if`
 - `import`
+- `in`
+- `is`
 - `lambda`
-- `None`
 - `nonlocal`
+- `not`
+- `or`
 - `pass`
 - `raise`
 - `return`
-- `True`
 - `try`
 - `while`
 - `with`
@@ -71,7 +104,7 @@ There are **26** keywords in Python.
 ---
 
 ### Variables
-Variables are used to store values in Python. They are declared using the `=` operator.
+Variables are assigned using the `=` operator.
 ```python
 num: int = 42
 name: str = "John"
@@ -79,227 +112,239 @@ name: str = "John"
 
 ---
 
-### Literals
+### Primitive Data Types
+#### String
+Type hint: `str`
 
-#### strings
-type hint: `str`
-A string literal is a sequence of characters enclosed in single (`'`) or double (`"`) quotes.
+Strings store text.
 ```python
 word: str = "Hello!"
 ```
 
-**triple quotes**: Triple quotes (`'''` or `"""`) allow you to use multi-line string literals.
-```python
-multi_line: str = """This is a
-multi-line string."""
-```
+See also:
+- [Strings](strings/README.md)
 
-**f-strings**: The `f` prefix before the string literal allows you to use formatted string literals.
-```python
-name: str = "John"
-age: int = 30
-statement: str = f"My name is {name} and I am {age} years old."
-```
+#### Integer
+Type hint: `int`
 
-**raw strings**: The `r` prefix before the string literal allows you to use raw string literals.
-```python
-path: str = r"C:\Users\John\Documents\file.txt"
-```
-
-#### integers
-type hint: `int`
-An integer literal is a whole number without a decimal point.
+Ints store Integers.
 ```python
 num: int = 42
-num_2: int = -75
+negative: int = -75
 zero: int = 0
 ```
 
-#### floating-point numbers
-type hint: `float`
-A floating-point literal is a number with a decimal point.
+#### Float
+Type hint: `float`
+
+Floats store numbers with a decimal point.
 ```python
 pi: float = 3.14
-num: float = -2.5
+value: float = -2.5
 zero: float = 0.0
 ```
 
-#### boolean
-type hint: `bool`
-A boolean literal is `True` or `False`.
+#### Boolean
+Type hint: `bool`
+
+Booleans store `True` or `False`.
 ```python
 is_true: bool = True
 is_false: bool = False
 ```
 
 #### None
-A `None` literal represents the absence of a value.
+`None` represents the absence of a value.
 ```python
 none_value: None = None
 ```
 
 ---
 
+### Data Structures
+#### Lists
+Lists are ordered, mutable collections.
+```python
+fruits: list[str] = ["apple", "banana", "cherry"]
+```
+
+#### Tuples
+Tuples are ordered, immutable collections.
+```python
+point: tuple[int, int] = (10, 20)
+```
+
+#### Dictionaries
+Dictionaries store key-value pairs.
+```python
+person: dict[str, str | int] = {
+    "name": "John",
+    "age": 30,
+    "city": "New York",
+}
+```
+
+#### Sets
+Sets store unique values.
+```python
+unique_numbers: set[int] = {1, 2, 3}
+```
+
+---
+
 ### Conditionals
 #### if
-The `if` statement is used to execute a block of code if a condition is `True`.
+The `if` statement executes a block of code when a condition is `True`.
 ```python
-if 5 == 2+3:
-  print("True")
+if score >= 90:
+    print("Excellent")
 ```
 
 #### elif
-The `elif` statement is used to execute a block of code if the condition is `True` and condition just before it is `False`.
+The `elif` statement checks another condition if the previous one was `False`.
 ```python
-if 5 == 2+3:
-  print("True")
-elif 5 != 2+3:
-  print("False")
-elif 5 < 2+3:
-  print("Less than")
+if score >= 90:
+    print("Excellent")
+elif score >= 75:
+    print("Pass")
 ```
 
 #### else
-The `else` statement is used to execute a block of code if all previous conditions are `False`.
+The `else` statement executes when all previous conditions are `False`.
 ```python
-if 5 == 2+3:
-  print("True")
+if score >= 90:
+    print("Excellent")
 else:
-  print("False")
+    print("Keep trying")
 ```
 
-#### inline uses
-When assigning a value based on a condition, you can use an `if`-`else` expression.
+#### Inline Usage
+You can use an inline conditional expression when assigning or returning a value.
 ```python
-true: bool = True
-value: int = 10 if true else 5
+result: str = "Pass" if score >= 75 else "Fail"
 ```
-When returning a value based on a condition, you can use an `if`-`else` expression.
+
 ```python
 def is_even(num: int) -> bool:
-  return True if num % 2 == 0 else False
+    return True if num % 2 == 0 else False
 ```
 
 ---
 
 ### Loops
 #### for
-The `for` loop is used to iterate over a sequence.
+`for` loops iterate over a sequence or iterable.
 ```python
 for i in range(5):
-  print(i)
+    print(i)
 ```
+
 ```python
 numbers: list[int] = [1, 2, 3, 4, 5]
 for number in numbers:
-  print(number)
+    print(number)
 ```
 
 #### while
-The `while` loop is used to execute a block of code while a condition is `True`.
+`while` loops continue as long as a condition is `True`.
 ```python
-while 5 > 2:
-  print("True")
+count: int = 0
+while count < 5:
+    print(count)
+    count += 1
 ```
 
 ---
 
-### Callables
-
-#### Function
-
-##### function definition
-- The `def` statement is used to define a function.
+### Functions
+#### Function Definition
+Use the `def` statement to define a function.
 ```python
 def greet() -> None:
-  print("Hello, World!")
+    print("Hello, World!")
 ```
 
-##### function call
-- A function is called by its name followed by parentheses `()`.
-- Arguments are passed to a function by position or by name.
+#### Function Call
+A function is called by its name followed by parentheses `()`.
 ```python
 greet()
 ```
 
-##### return
-- The `return` statement is used to return a value from a function.
+#### Return
+Use `return` to return a value from a function.
 ```python
 def greet() -> str:
-  return "Hello, World!"
+    return "Hello, World!"
 ```
 
-##### Arguments
-Arguments are variables that are passed to a function.
+#### Arguments
+Arguments are values passed to a function.
 
-- **Positional arguments**
-  - Arguments are passed to a function in the order they are defined.
-  - Omitting an argument raises a `TypeError`.
+**Positional arguments**
 ```python
 def greet(name: str, message: str) -> str:
-  return f"{message}, {name}!"
+    return f"{message}, {name}!"
 
 greet("Alice", "Hello")
 ```
 
-- **Keyword arguments**
-  - Arguments are passed to a function by name.
-  - Omitting a keyword argument raises a `TypeError`.
+**Keyword arguments**
 ```python
 def greet(name: str, message: str) -> str:
-  return f"{message}, {name}!"
+    return f"{message}, {name}!"
 
 greet(message="Hello", name="Alice")
 ```
 
-- **Default arguments**
-  - Arguments that have a default value and can be omitted when calling the function.
-  - Default arguments are defined by assigning a value to a parameter in the function definition.
-  - Default arguments must be defined after non-default arguments.
+**Default arguments**
 ```python
-def greet(name: str, message: str = "World") -> str:
-  return f"{message}, {name}!"
+def greet(name: str, message: str = "Hello") -> str:
+    return f"{message}, {name}!"
 
 greet("Alice")
 ```
 
-- **Variable-length arguments**
-  - Arguments that are passed to a function as a tuple of values.
-  - Variable-length arguments are defined by using `*` before the parameter name in the function definition.
+**Variable-length arguments**
 ```python
 def greet(*names: str) -> str:
-  return f"Hello, {', '.join(names)}!"
+    return f"Hello, {', '.join(names)}!"
 
 greet("Alice", "Bob", "Charlie")
 ```
 
-- **Keyword-only arguments**
-  - Arguments that must be passed by keyword and cannot be passed by position.
-  - Keyword-only arguments are defined by using `*` before the parameter name in the function definition.
+**Keyword-only arguments**
 ```python
 def greet(*, name: str) -> str:
-  return f"Hello, {name}!"
+    return f"Hello, {name}!"
 
 greet(name="Alice")
 ```
 
-#### lambda
-The `lambda` statement is used to define an anonymous, single-expression function.
-
-##### definition
-
-A `lambda` function is defined using the `lambda` keyword followed by a comma-separated list of parameters and a colon `:` followed by an expression.
-
+#### Lambda
+A `lambda` expression defines an anonymous, single-expression function.
 ```python
+from collections.abc import Callable
+
 add: Callable[[int, int], int] = lambda x, y: x + y
 ```
-
-##### call
-
-A `lambda` function is called by its name followed by parentheses `()` with the arguments passed to it.
 
 ```python
 result = add(3, 5)
 ```
 
 ---
+
+### Python-Specific Features
+#### F-Strings
+F-strings provide a concise way to embed expressions inside strings.
+```python
+name: str = "John"
+age: int = 30
+statement: str = f"My name is {name} and I am {age} years old."
+```
+
+#### Comprehensions
+Comprehensions provide a compact way to build collections.
+```python
+squares: list[int] = [number * number for number in range(5)]
+```
