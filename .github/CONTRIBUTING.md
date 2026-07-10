@@ -11,8 +11,17 @@ Thank you for your interest in contributing to this project.
 ## Development
 
 - Fork the repository.
+```bash
+git clone https://github.com/Noor-Taquee/language-syntax.git
+cd language-syntax
+```
 
 - Create a branch for your language/change.
+```bash
+git checkout main
+git pull origin main
+git checkout -b <your-username>/<feature or change>
+```
 
 - Make your changes.
 
